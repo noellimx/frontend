@@ -29,6 +29,9 @@ dependencies:
   redux:
     specifier: ^4.2.1
     version: 4.2.1
+  redux-logger:
+    specifier: ^3.0.6
+    version: 3.0.6
   redux-saga:
     specifier: ^1.2.3
     version: 1.2.3
@@ -40,6 +43,9 @@ devDependencies:
   "@types/react-dom":
     specifier: ^18.2.7
     version: 18.2.7
+  "@types/redux-logger":
+    specifier: ^3.0.9
+    version: 3.0.9
   "@typescript-eslint/eslint-plugin":
     specifier: ^6.0.0
     version: 6.0.0(@typescript-eslint/parser@6.0.0)(eslint@8.45.0)(typescript@5.0.2)
@@ -61,6 +67,9 @@ devDependencies:
   eslint-plugin-react-refresh:
     specifier: ^0.4.3
     version: 0.4.3(eslint@8.45.0)
+  i:
+    specifier: ^0.3.7
+    version: 0.3.7
   postcss:
     specifier: ^8.4.27
     version: 8.4.27
@@ -353,7 +362,6 @@ packages:
     engines: { node: ">=6.9.0" }
     dependencies:
       regenerator-runtime: 0.14.0
-    dev: false
 
   /@babel/template@7.22.5:
     resolution:
@@ -956,6 +964,15 @@ packages:
       "@types/scheduler": 0.16.3
       csstype: 3.1.2
 
+  /@types/redux-logger@3.0.9:
+    resolution:
+      {
+        integrity: sha512-cwYhVbYNgH01aepeMwhd0ABX6fhVB2rcQ9m80u8Fl50ZODhsZ8RhQArnLTkE7/Zrfq4Sz/taNoF7DQy9pCZSKg==,
+      }
+    dependencies:
+      redux: 4.2.1
+    dev: true
+
   /@types/scheduler@0.16.3:
     resolution:
       {
@@ -1480,6 +1497,13 @@ packages:
     dependencies:
       ms: 2.1.2
     dev: true
+
+  /deep-diff@0.3.8:
+    resolution:
+      {
+        integrity: sha512-yVn6RZmHiGnxRKR9sJb3iVV2XTF1Ghh2DiWRZ3dMnGc43yUdWWF/kX6lQyk3+P84iprfWKU/8zFTrlkvtFm1ug==,
+      }
+    dev: false
 
   /deep-is@0.1.4:
     resolution:
@@ -2006,6 +2030,14 @@ packages:
     dependencies:
       react-is: 16.13.1
     dev: false
+
+  /i@0.3.7:
+    resolution:
+      {
+        integrity: sha512-FYz4wlXgkQwIPqhzC5TdNMLSE5+GS1IIDJZY/1ZiEPCT2S3COUVZeT5OW4BmW4r5LHLQuOosSwsvnroG9GR59Q==,
+      }
+    engines: { node: ">=0.4" }
+    dev: true
 
   /ignore@5.2.4:
     resolution:
@@ -2731,6 +2763,15 @@ packages:
       picomatch: 2.3.1
     dev: true
 
+  /redux-logger@3.0.6:
+    resolution:
+      {
+        integrity: sha512-JoCIok7bg/XpqA1JqCqXFypuqBbQzGQySrhFzewB7ThcnysTO30l4VCst86AuB9T9tuT03MAA56Jw2PNhRSNCg==,
+      }
+    dependencies:
+      deep-diff: 0.3.8
+    dev: false
+
   /redux-saga@1.2.3:
     resolution:
       {
@@ -2758,14 +2799,12 @@ packages:
       }
     dependencies:
       "@babel/runtime": 7.22.10
-    dev: false
 
   /regenerator-runtime@0.14.0:
     resolution:
       {
         integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==,
       }
-    dev: false
 
   /reselect@4.1.8:
     resolution:
