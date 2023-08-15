@@ -4,21 +4,19 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
-  Route,
 } from "react-router-dom";
 
-import { DefaultLayout } from "./pages/components/layout.tsx";
-import PageHome from "./pages/home";
-import PageCounter from "./pages/counter";
+
 import { store } from "./store.tsx";
 import "./index.css";
+import RootRoutes from "./routes.tsx";
+
+
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<DefaultLayout />}>
-      <Route index element={<PageHome />} />
-      <Route path="/counter" element={<PageCounter />}></Route>
-    </Route>,
+    RootRoutes,
   ),
 );
 
