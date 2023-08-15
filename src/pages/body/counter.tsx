@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
-import { useAppDispatch, useAppSelector } from "../store";
-import counterSlice from "../redux/store/counter";
+import counterSlice from "../../redux/store/counter";
+import { useAppDispatch, useAppSelector } from "../../store";
 
 const Page = () => {
   const counter = useAppSelector((s) => s.state.counter);

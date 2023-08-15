@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import axios, { AxiosError } from "axios";
 
+import { globalConfig } from '../../../initConfig';
 const initialState = {
     loading: false,
     userInfo: {},
@@ -10,19 +11,18 @@ const initialState = {
     success: false,
 }
 
-const backendURL = "asd"
 export const registerUser = createAsyncThunk(
     'auth/register',
-    async ({ firstName, email, password }: { firstName: string, email: string, password: string }, { rejectWithValue }) => {
+    async ({ email, password }: { email: string, password: string }, { rejectWithValue }) => {
         try {
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             }
-            await axios.post(
-                `${backendURL}/api/user/register`,
-                { firstName, email, password },
+            return await axios.post(
+                `${globalConfig.serverUrl}/api/user/register`,
+                { email, password },
                 config
             )
         } catch (_error) {
@@ -39,6 +39,37 @@ export const registerUser = createAsyncThunk(
         }
     }
 )
+
+export const login = createAsyncThunk(
+    'auth/login',
+    async ({ email, password }: { email: string, password: string }, { rejectWithValue }) => {
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+            return await axios.post(
+                `${globalConfig.serverUrl}/api/user/login`,
+                { email, password },
+                config
+            )
+        } catch (_error) {
+            const error = _error as AxiosError;
+            // return custom error message from backend if present
+            // if (error.response && error.response.data.message) {
+            //     return rejectWithValue(error.response.data.message)
+            // } else {
+            //     return rejectWithValue(error.message)
+            // }
+
+            return rejectWithValue(error.message)
+
+        }
+    }
+)
+
+
 
 const authSlice = createSlice({
     name: 'auth',
@@ -57,6 +88,15 @@ const authSlice = createSlice({
                 state.success = true
             })
             builder.addCase(registerUser.rejected, (state, action) => {
+                action.payload;
+                state.loading = false
+                // state.error = payload
+            })
+
+
+            builder.addCase(login.fulfilled, (state, action) => {
+
+                console.log("login fulfilled")
                 action.payload;
                 state.loading = false
                 // state.error = payload

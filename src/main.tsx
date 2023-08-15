@@ -7,9 +7,37 @@ import {
 } from "react-router-dom";
 
 
-import { store } from "./store.tsx";
-import "./index.css";
 import RootRoutes from "./routes.tsx";
+import "./index.css";
+
+
+
+// development config
+
+import logger from "redux-logger";
+import { Middleware } from "redux";
+import { store } from "./store.tsx";
+import initMSW from "./mock/service.ts";
+import initConfig from "./initConfig.ts";
+
+
+const reduxMiddlewares: Middleware[] = []
+
+// Environment-based Config
+
+
+
+const globalConfig = initConfig(import.meta.env.VITE_SERVER_URL)
+
+
+if (import.meta.env.MODE === "development") {
+
+
+  reduxMiddlewares.push(logger)
+  const { client } = initMSW(globalConfig.serverUrl)
+  client.start()
+}
+
 
 
 
