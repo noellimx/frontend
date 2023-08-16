@@ -1,12 +1,9 @@
-import { login } from "../../redux/store/auth";
-import { useAppDispatch, useAppSelector } from "../../store";
+
+import { useAppSelector } from "../../store";
+import LoginForm from "../components/auth/LoginForm";
 
 const Body = () => {
-
     const auth = useAppSelector(s => s.state.auth)
-
-
-    const dispatch = useAppDispatch()
 
     if (auth.success) {
         return <div> Dashboard</div>
@@ -14,15 +11,7 @@ const Body = () => {
 
     return (
         <>
-            <div
-
-                onClick={() => {
-
-                    dispatch(login({ email: "a", password: "b" }))
-                }}
-            >
-                Login
-            </div>
+            <LoginForm />
 
         </>
     );

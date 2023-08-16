@@ -1,27 +1,17 @@
-
-
-
-
-
 type Config = {
-    serverUrl: string
-}
-
-
+  serverUrl: string;
+};
 
 export const globalConfig: Config = {
-    serverUrl: ""
-
-}
+  serverUrl: "",
+};
 
 const initConfig = (serverUrl: string = "") => {
-    globalConfig.serverUrl = serverUrl
+  globalConfig.serverUrl = serverUrl;
 
-    console.log(`globalConfig:  ${JSON.stringify(globalConfig)}`)
+  console.log(`globalConfig:  ${JSON.stringify(globalConfig)}`);
 
-    return globalConfig;
-}
+  return globalConfig;
+};
 
-
-
-export default initConfig
+export default initConfig;

@@ -1,13 +1,14 @@
 import { Outlet, useNavigate } from "react-router-dom";
 
 const Logo = () => {
-
     const navigate = useNavigate();
     return (
-        <div className="flex p-3 items-center justify-start " onClick={() => {
-
-            navigate("/")
-        }}>
+        <div
+            className="flex p-3 items-center justify-start "
+            onClick={() => {
+                navigate("/");
+            }}
+        >
             <div className="flex h-full">
                 <div className="flex h-full items-center">
                     <img
@@ -32,9 +33,19 @@ const Header = () => {
 
 export const DefaultLayout = () => {
     return (
-        <div id="app-entry" className="flex  bg-red-50 h-screen w-screen flex-col">
-            <Header />
-            <Outlet />
-        </div>
+        <div id="app-entry" className="flex   h-screen w-screen flex-col ">
+            <header id="nav-bar" className="sticky top-0 ">
+
+                <Header />
+
+
+            </header>
+            <main id="default-layout-outlet-wrapper" className="flex-1 overflow-y-scroll w-full min-h-max border-1">
+
+                <Outlet />
+
+
+            </main>
+        </div >
     );
 };
