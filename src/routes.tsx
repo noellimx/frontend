@@ -9,17 +9,9 @@ import { useAppSelector } from "./store.tsx";
 const AuthWrapper = () => {
   const auth = useAppSelector((s) => s.state.auth);
   if (auth.success) {
-    return (
-      <>
-        <Outlet />
-      </>
-    );
+    return <Outlet />
   }
-  return (
-    <>
-      <div>Unauthenticated.</div>
-    </>
-  );
+  return <div>Unauthenticated.</div>;
 };
 
 const Root = (

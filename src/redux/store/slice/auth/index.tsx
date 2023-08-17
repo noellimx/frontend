@@ -3,6 +3,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
 import { globalConfig } from "../../../../initConfig";
+import { notify } from "../notification";
+
+
+const sliceName = "authentication"
 const initialState = {
   loading: false,
   userInfo: {},
@@ -12,7 +16,7 @@ const initialState = {
 };
 
 export const registerUser = createAsyncThunk(
-  "auth/register",
+  `${sliceName}/register`,
   async (
     { email, password }: { email: string; password: string },
     { rejectWithValue },
@@ -30,12 +34,6 @@ export const registerUser = createAsyncThunk(
       );
     } catch (_error) {
       const error = _error as AxiosError;
-      // return custom error message from backend if present
-      // if (error.response && error.response.data.message) {
-      //     return rejectWithValue(error.response.data.message)
-      // } else {
-      //     return rejectWithValue(error.message)
-      // }
 
       return rejectWithValue(error.message);
     }
@@ -48,10 +46,10 @@ export const login = createAsyncThunk<
   { username: string; password: string },
   { rejectValue: AuthenticateThunkRejectValue }
 >(
-  "auth/login",
+  `${sliceName}/login`,
   async (
     { username, password }: { username: string; password: string },
-    { rejectWithValue },
+    { rejectWithValue, dispatch },
   ) => {
     try {
       const config = {
@@ -67,9 +65,13 @@ export const login = createAsyncThunk<
 
       const token = resp.data.token as string;
 
+      dispatch(notify({ text: "Authentication Success", type: "Info" }))
+
       return { token };
     } catch (_error) {
       const error = _error as AxiosError;
+
+      dispatch(notify({ text: "Authentication Fail", type: "Error" }))
 
       return rejectWithValue({
         statusText: error.response?.statusText || "",
@@ -80,7 +82,7 @@ export const login = createAsyncThunk<
 );
 
 const SliceAuth = createSlice({
-  name: "auth",
+  name: sliceName,
   initialState,
   reducers: {},
   extraReducers: (builder) => {

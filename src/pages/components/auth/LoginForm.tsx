@@ -2,13 +2,16 @@ import { useAppDispatch } from "../../../store";
 import ButtonFC from "../utils/Button";
 
 import { login } from "../../../redux/store/slice/auth";
+
 import { useState } from "react";
 const Form = () => {
   const dispatch = useAppDispatch();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const dispatchLogin = () => dispatch(login({ username, password }));
+  const dispatchLogin = () => {
+    dispatch(login({ username, password }))
+  };
 
   return (
     <>
@@ -23,7 +26,6 @@ const Form = () => {
             />
           </div>
         </div>
-
         <div
           id="landing-page-login"
           className="flex flex-col bg-center	 basis-1/2 p-[10%] w-full min-h-full justify-center items-center bg-logo-transparent bg-cover bg-blend-darken	bg-primary-light	"

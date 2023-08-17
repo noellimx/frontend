@@ -1,4 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../store";
+import { NotificationDetail } from "../../redux/store/slice/notification";
+import { FC } from "react";
 
 const Logo = () => {
   const navigate = useNavigate();
@@ -31,11 +34,33 @@ const Header = () => {
   );
 };
 
+
+
+const NotificationFC: FC<{ detail: NotificationDetail }> = ({ detail }) => {
+
+
+  const emoji = detail.type === "Error" ? "❗" : ""
+
+  return <div key={`${detail.uuid}-notification-toast`} id={`${detail.uuid}-notification-toast`} className="flex rounded-l-[25px] border-secondary-deep border-l-[1px] border-y-[1px] bg-white p-3 "><div>{`${emoji} ${detail.type}: ${detail.text}`}</div> </div>
+}
+
+const NotificationsFC: FC<{ details: NotificationDetail[] }> = ({ details }) => {
+  return <div id="notifications" className="absolute right-0">{
+    details.map((detail) => {
+      return <NotificationFC detail={detail} key={detail.uuid} />
+    })
+  }</div>
+
+}
+
 export const DefaultLayout = () => {
+  const notificationDetails = useAppSelector(s => s.state.notification.items)
+
   return (
     <div id="app-entry" className="flex   h-screen w-screen flex-col ">
       <header id="nav-bar" className="sticky top-0 ">
         <Header />
+        <NotificationsFC details={notificationDetails} />
       </header>
       <main
         id="default-layout-outlet-wrapper"
@@ -43,6 +68,8 @@ export const DefaultLayout = () => {
       >
         <Outlet />
       </main>
+
+
     </div>
   );
 };

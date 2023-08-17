@@ -8,7 +8,7 @@ const lilac = "#C8A2C8";
 const orchid = "#DA70D6";
 const eggshellWhite = "#F0EAD6";
 const mistyGrey = "#D3D3D3";
-const amethyst = "#9966C";
+const amethyst = "#9966CC";
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
