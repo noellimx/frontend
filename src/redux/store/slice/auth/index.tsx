@@ -42,15 +42,17 @@ export const registerUser = createAsyncThunk(
   },
 );
 
-type AuthenticateThunkRejectValue = { statusCode: number, statusText: string }
-export const login = createAsyncThunk<{ token: string }, { username: string, password: string }, { rejectValue: AuthenticateThunkRejectValue }>(
+type AuthenticateThunkRejectValue = { statusCode: number; statusText: string };
+export const login = createAsyncThunk<
+  { token: string },
+  { username: string; password: string },
+  { rejectValue: AuthenticateThunkRejectValue }
+>(
   "auth/login",
   async (
     { username, password }: { username: string; password: string },
     { rejectWithValue },
   ) => {
-
-
     try {
       const config = {
         headers: {
@@ -65,11 +67,14 @@ export const login = createAsyncThunk<{ token: string }, { username: string, pas
 
       const token = resp.data.token as string;
 
-      return { token }
+      return { token };
     } catch (_error) {
       const error = _error as AxiosError;
 
-      return rejectWithValue({ statusText: error.response?.statusText || "", statusCode: error.response?.status || -1 })
+      return rejectWithValue({
+        statusText: error.response?.statusText || "",
+        statusCode: error.response?.status || -1,
+      });
     }
   },
 );
@@ -103,7 +108,6 @@ const SliceAuth = createSlice({
     builder.addCase(login.pending, (state) => {
       state.loading = true;
       state.token = "";
-
     });
 
     builder.addCase(login.rejected, (state, action) => {
