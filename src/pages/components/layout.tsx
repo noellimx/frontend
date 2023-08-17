@@ -1,5 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 
+
+
 const Logo = () => {
     const navigate = useNavigate();
     return (
@@ -35,17 +37,14 @@ export const DefaultLayout = () => {
     return (
         <div id="app-entry" className="flex   h-screen w-screen flex-col ">
             <header id="nav-bar" className="sticky top-0 ">
-
                 <Header />
-
-
             </header>
-            <main id="default-layout-outlet-wrapper" className="flex-1 overflow-y-scroll w-full min-h-max border-1">
-
+            <main
+                id="default-layout-outlet-wrapper"
+                className="flex-1 overflow-y-scroll w-full min-h-max border-1"
+            >
                 <Outlet />
-
-
             </main>
-        </div >
+        </div>
     );
 };
