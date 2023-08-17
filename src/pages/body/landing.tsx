@@ -4,7 +4,7 @@ import LoginForm from "../components/auth/LoginForm";
 const Body = () => {
   const auth = useAppSelector((s) => s.state.auth);
 
-  if (auth.success) {
+  if (auth.token) {
     return <div> Dashboard</div>;
   }
 

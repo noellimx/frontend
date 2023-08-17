@@ -1,7 +1,9 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { NotificationDetail } from "../../redux/store/slice/notification";
-import { FC } from "react";
+import { FC, useMemo } from "react";
+import ButtonFC from "./utils/Button";
+import { login, logoutUser } from "../../redux/store/slice/auth";
 
 const Logo = () => {
   const navigate = useNavigate();
@@ -26,22 +28,58 @@ const Logo = () => {
   );
 };
 
+
+const NavItem = () => {
+  return <></>
+}
+
+
+const AuthenticatedNavItems = () => {
+
+
+  const dispatch = useAppDispatch();
+
+  const dispatchLogout = () => dispatch(logoutUser())
+
+  return <div className="flex"> <NavItem /> <ButtonFC text="logout" onClick={dispatchLogout} />  </div>
+}
+const UnauthenticatedNavItems = () => {
+
+
+  return <div className="flex"></div>
+}
+
+
 const Header = () => {
-  return (
-    <div className="flex h-16 w-screen  bg-white border-b-4 border-delimiter">
-      <Logo />
+
+
+  const authToken = useAppSelector(s => s.state.auth.token);
+
+  const NavItems_ = useMemo(() => {
+    return authToken === "" ? <UnauthenticatedNavItems /> : <AuthenticatedNavItems />
+  }, [authToken])
+  return <div className="flex h-16 w-screen  bg-white border-b-4 border-delimiter items-center">
+    <Logo />
+    <div className="flex ml-auto p-[10px]">
+      {NavItems_}
     </div>
-  );
+  </div>
 };
 
 
 
+const emojiType = {
+  "Error": "❗",
+  "Info": "😊"
+}
+
 const NotificationFC: FC<{ detail: NotificationDetail }> = ({ detail }) => {
 
 
-  const emoji = detail.type === "Error" ? "❗" : ""
+  const emoji = emojiType[detail.type] || ""
 
-  return <div key={`${detail.uuid}-notification-toast`} id={`${detail.uuid}-notification-toast`} className="flex rounded-l-[25px] border-secondary-deep border-l-[1px] border-y-[1px] bg-white p-3 "><div>{`${emoji} ${detail.type}: ${detail.text}`}</div> </div>
+  return <div key={`notification-toast-${detail.uuid}`} id={`${detail.uuid}-notification-toast`}
+    className="flex bg-white  py-1 px-3 rounded-l-[25px] border-secondary-deep border-l-[1px] border-y-[1px]"><div>{`${emoji} ${detail.type}: ${detail.text}`}</div> </div>
 }
 
 const NotificationsFC: FC<{ details: NotificationDetail[] }> = ({ details }) => {
@@ -68,8 +106,6 @@ export const DefaultLayout = () => {
       >
         <Outlet />
       </main>
-
-
     </div>
   );
 };

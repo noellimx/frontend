@@ -16,10 +16,10 @@ const Form = () => {
   return (
     <>
       <div className=" flex  flex-row w-full min-h-full">
-        <div id="landing-page-decor" className="flex basis-1/2 ">
+        <div id="login-form-decor" className="flex basis-1/2 ">
           <div className="flex h-full items-center">
             <img
-              id="landing-page-background-fill"
+              id="login-form-background-fill"
               className="h-full	 object-cover w-full"
               src="/assets/landing-picture-fill.jpeg"
               alt="logo"
@@ -27,10 +27,10 @@ const Form = () => {
           </div>
         </div>
         <div
-          id="landing-page-login"
+          id="login-form-login"
           className="flex flex-col bg-center	 basis-1/2 p-[10%] w-full min-h-full justify-center items-center bg-logo-transparent bg-cover bg-blend-darken	bg-primary-light	"
         >
-          <form className="bg-white bg-opacity-90 border-primary-deep border h-fit max-w-xs rounded px-8 pt-6 pb-8 mb-4">
+          <form className="bg-primary-light bg-opacity-90 border-primary-deep border h-fit max-w-xs rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"

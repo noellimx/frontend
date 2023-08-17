@@ -46,7 +46,7 @@ export const login = createAsyncThunk<
   { username: string; password: string },
   { rejectValue: AuthenticateThunkRejectValue }
 >(
-  `${sliceName}/login`,
+  `${sliceName}/logout`,
   async (
     { username, password }: { username: string; password: string },
     { rejectWithValue, dispatch },
@@ -65,19 +65,29 @@ export const login = createAsyncThunk<
 
       const token = resp.data.token as string;
 
-      dispatch(notify({ text: "Authentication Success", type: "Info" }))
+      dispatch(notify({ text: "Authentication Success", type: "Info", ms: 3000 }))
 
       return { token };
     } catch (_error) {
       const error = _error as AxiosError;
 
-      dispatch(notify({ text: "Authentication Fail", type: "Error" }))
+      dispatch(notify({ text: "Authentication Fail", type: "Error", ms: 3000 }))
 
       return rejectWithValue({
         statusText: error.response?.statusText || "",
         statusCode: error.response?.status || -1,
       });
     }
+  },
+);
+
+
+export const logoutUser = createAsyncThunk(
+  `${sliceName}/login`,
+  async (
+  ) => {
+
+
   },
 );
 
@@ -117,6 +127,11 @@ const SliceAuth = createSlice({
       state.token = "";
       const payload = action.payload as AuthenticateThunkRejectValue;
       state.error = payload.statusText as string;
+    });
+
+
+    builder.addCase(logoutUser.fulfilled, (state) => {
+      state.token = "";
     });
   },
 });
