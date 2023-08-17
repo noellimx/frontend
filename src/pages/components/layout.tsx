@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../store";
 import { NotificationDetail } from "../../redux/store/slice/notification";
 import { FC, useMemo } from "react";
 import ButtonFC from "./utils/Button";
-import { login, logoutUser } from "../../redux/store/slice/auth";
+import { logoutUser } from "../../redux/store/slice/auth";
 
 const Logo = () => {
   const navigate = useNavigate();
@@ -28,71 +28,77 @@ const Logo = () => {
   );
 };
 
-
 const NavItem = () => {
-  return <></>
-}
-
-
-const AuthenticatedNavItems = () => {
-
-
-  const dispatch = useAppDispatch();
-
-  const dispatchLogout = () => dispatch(logoutUser())
-
-  return <div className="flex"> <NavItem /> <ButtonFC text="logout" onClick={dispatchLogout} />  </div>
-}
-const UnauthenticatedNavItems = () => {
-
-
-  return <div className="flex"></div>
-}
-
-
-const Header = () => {
-
-
-  const authToken = useAppSelector(s => s.state.auth.token);
-
-  const NavItems_ = useMemo(() => {
-    return authToken === "" ? <UnauthenticatedNavItems /> : <AuthenticatedNavItems />
-  }, [authToken])
-  return <div className="flex h-16 w-screen  bg-white border-b-4 border-delimiter items-center">
-    <Logo />
-    <div className="flex ml-auto p-[10px]">
-      {NavItems_}
-    </div>
-  </div>
+  return <></>;
 };
 
+const AuthenticatedNavItems = () => {
+  const dispatch = useAppDispatch();
 
+  const dispatchLogout = () => dispatch(logoutUser());
+
+  return (
+    <div className="flex">
+      {" "}
+      <NavItem /> <ButtonFC text="logout" onClick={dispatchLogout} />{" "}
+    </div>
+  );
+};
+const UnauthenticatedNavItems = () => {
+  return <div className="flex"></div>;
+};
+
+const Header = () => {
+  const authToken = useAppSelector((s) => s.state.auth.token);
+
+  const NavItems_ = useMemo(() => {
+    return authToken === "" ? (
+      <UnauthenticatedNavItems />
+    ) : (
+      <AuthenticatedNavItems />
+    );
+  }, [authToken]);
+  return (
+    <div className="flex h-16 w-screen  bg-white border-b-4 border-delimiter items-center">
+      <Logo />
+      <div className="flex ml-auto p-[10px]">{NavItems_}</div>
+    </div>
+  );
+};
 
 const emojiType = {
-  "Error": "❗",
-  "Info": "😊"
-}
+  Error: "❗",
+  Info: "😊",
+};
 
 const NotificationFC: FC<{ detail: NotificationDetail }> = ({ detail }) => {
+  const emoji = emojiType[detail.type] || "";
 
+  return (
+    <div
+      key={`notification-toast-${detail.uuid}`}
+      id={`${detail.uuid}-notification-toast`}
+      className="flex bg-white  py-1 px-3 rounded-l-[25px] border-secondary-deep border-l-[1px] border-y-[1px]"
+    >
+      <div>{`${emoji} ${detail.type}: ${detail.text}`}</div>{" "}
+    </div>
+  );
+};
 
-  const emoji = emojiType[detail.type] || ""
-
-  return <div key={`notification-toast-${detail.uuid}`} id={`${detail.uuid}-notification-toast`}
-    className="flex bg-white  py-1 px-3 rounded-l-[25px] border-secondary-deep border-l-[1px] border-y-[1px]"><div>{`${emoji} ${detail.type}: ${detail.text}`}</div> </div>
-}
-
-const NotificationsFC: FC<{ details: NotificationDetail[] }> = ({ details }) => {
-  return <div id="notifications" className="absolute right-0">{
-    details.map((detail) => {
-      return <NotificationFC detail={detail} key={detail.uuid} />
-    })
-  }</div>
-
-}
+const NotificationsFC: FC<{ details: NotificationDetail[] }> = ({
+  details,
+}) => {
+  return (
+    <div id="notifications" className="absolute right-0">
+      {details.map((detail) => {
+        return <NotificationFC detail={detail} key={detail.uuid} />;
+      })}
+    </div>
+  );
+};
 
 export const DefaultLayout = () => {
-  const notificationDetails = useAppSelector(s => s.state.notification.items)
+  const notificationDetails = useAppSelector((s) => s.state.notification.items);
 
   return (
     <div id="app-entry" className="flex   h-screen w-screen flex-col ">

@@ -7,7 +7,7 @@ import SliceNotification from "./slice/notification";
 export const rootReducer = combineReducers({
   counter: counter.reducer,
   auth: SliceAuth.reducer,
-  notification: SliceNotification.reducer
+  notification: SliceNotification.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

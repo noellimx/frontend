@@ -10,7 +10,7 @@ const Form = () => {
   const [password, setPassword] = useState<string>("");
 
   const dispatchLogin = () => {
-    dispatch(login({ username, password }))
+    dispatch(login({ username, password }));
   };
 
   return (

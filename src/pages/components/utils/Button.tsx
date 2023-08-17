@@ -4,7 +4,7 @@ const ButtonFC: FC<{
   text: string;
   extendClassName?: string;
   onClick: () => void;
-}> = ({ text = "util-button", onClick = () => { }, extendClassName = "" }) => {
+}> = ({ text = "util-button", onClick = () => {}, extendClassName = "" }) => {
   return (
     <div className={`flex items-center justify-between ${extendClassName}`}>
       <button

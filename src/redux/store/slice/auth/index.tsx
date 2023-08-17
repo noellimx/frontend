@@ -5,8 +5,7 @@ import axios, { AxiosError } from "axios";
 import { globalConfig } from "../../../../initConfig";
 import { notify } from "../notification";
 
-
-const sliceName = "authentication"
+const sliceName = "authentication";
 const initialState = {
   loading: false,
   userInfo: {},
@@ -65,13 +64,17 @@ export const login = createAsyncThunk<
 
       const token = resp.data.token as string;
 
-      dispatch(notify({ text: "Authentication Success", type: "Info", ms: 3000 }))
+      dispatch(
+        notify({ text: "Authentication Success", type: "Info", ms: 3000 }),
+      );
 
       return { token };
     } catch (_error) {
       const error = _error as AxiosError;
 
-      dispatch(notify({ text: "Authentication Fail", type: "Error", ms: 3000 }))
+      dispatch(
+        notify({ text: "Authentication Fail", type: "Error", ms: 3000 }),
+      );
 
       return rejectWithValue({
         statusText: error.response?.statusText || "",
@@ -81,14 +84,9 @@ export const login = createAsyncThunk<
   },
 );
 
-
 export const logoutUser = createAsyncThunk(
   `${sliceName}/login`,
-  async (
-  ) => {
-
-
-  },
+  async () => {},
 );
 
 const SliceAuth = createSlice({
@@ -128,7 +126,6 @@ const SliceAuth = createSlice({
       const payload = action.payload as AuthenticateThunkRejectValue;
       state.error = payload.statusText as string;
     });
-
 
     builder.addCase(logoutUser.fulfilled, (state) => {
       state.token = "";
