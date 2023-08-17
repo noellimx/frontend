@@ -1,11 +1,22 @@
+import { FC } from "react";
 import { useAppSelector } from "../../store";
 import LoginForm from "../components/auth/LoginForm";
 
-const Body = () => {
+
+const Dashboard: FC = () => {
+
+
+  return <></>
+
+}
+
+const LandingHome = () => {
+
+
   const auth = useAppSelector((s) => s.state.auth);
 
   if (auth.token) {
-    return <div> Dashboard</div>;
+    return <Dashboard />
   }
 
   return (
@@ -15,4 +26,4 @@ const Body = () => {
   );
 };
 
-export default Body;
+export default LandingHome;

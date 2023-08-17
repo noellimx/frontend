@@ -1,9 +1,9 @@
 import { Outlet, Route } from "react-router-dom";
 
 import { DefaultLayout } from "./pages/components/layout.tsx";
-import BodyHome from "./pages/body/home.tsx";
+import BodyDiagnostics from "./pages/body/home.tsx";
 import BodyCounter from "./pages/body/counter.tsx";
-import BodyLanding from "./pages/body/landing.tsx";
+import BodyHome from "./pages/body/landing.tsx";
 import { useAppSelector } from "./store.tsx";
 
 const AuthWrapper = () => {
@@ -16,9 +16,9 @@ const AuthWrapper = () => {
 
 const Root = (
   <Route path="/" element={<DefaultLayout />}>
-    <Route index element={<BodyLanding />} />
+    <Route index element={<BodyHome />} />
     <Route path="/diagnostics">
-      <Route index element={<BodyHome />} />
+      <Route index element={<BodyDiagnostics />} />
       <Route path="counter" element={<BodyCounter />}></Route>
       <Route path="health" element={<AuthWrapper />}>
         <Route path="auth" element={<div>healthcheck</div>}></Route>
