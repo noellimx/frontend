@@ -4,6 +4,7 @@ import axios, { AxiosError } from "axios";
 
 import { globalConfig } from "../../../../initConfig";
 import { notify } from "../notification";
+import { Endpoints } from "../../../../types/endpoints";
 
 const sliceName = "authentication";
 const initialState = {
@@ -57,7 +58,7 @@ export const login = createAsyncThunk<
         },
       };
       const resp = await axios.post(
-        `${globalConfig.serverUrl}/api/user/login`,
+        `${globalConfig.serverUrl}${Endpoints.login}`,
         { username, password },
         config,
       );
@@ -86,7 +87,7 @@ export const login = createAsyncThunk<
 
 export const logoutUser = createAsyncThunk(
   `${sliceName}/login`,
-  async () => {},
+  async () => { },
 );
 
 const SliceAuth = createSlice({

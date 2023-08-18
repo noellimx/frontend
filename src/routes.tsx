@@ -3,11 +3,11 @@ import { Outlet, Route } from "react-router-dom";
 import { DefaultLayout } from "./pages/components/layout.tsx";
 import BodyDiagnostics from "./pages/body/home.tsx";
 import BodyCounter from "./pages/body/counter.tsx";
-import BodyHome from "./pages/body/landing.tsx";
+import BodyHome from "./pages/body/landing/index.tsx";
 import { useAppSelector } from "./store.tsx";
 
 const AuthWrapper = () => {
-  const auth = useAppSelector((s) => s.state.auth);
+  const auth = useAppSelector((s) => s.auth);
   if (auth.success) {
     return <Outlet />;
   }

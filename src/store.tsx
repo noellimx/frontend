@@ -5,7 +5,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { rootReducer } from "./redux/store/index.tsx";
 
 export const store = configureStore({
-  reducer: { state: rootReducer },
+  reducer: rootReducer,
   middleware: (getDefaults) => getDefaults().concat(logger),
 });
 

@@ -3,7 +3,7 @@ import { getHandlers } from "./handlers";
 import { setupWorker } from "msw";
 
 const initMSW = (serverUrl: string) => {
-  console.log(`${serverUrl} initMSW`);
+  console.log(`initMSW:: server url:: ${serverUrl}`);
 
   const handlers = getHandlers(serverUrl);
   const client = setupWorker(...handlers);

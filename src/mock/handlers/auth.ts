@@ -1,17 +1,16 @@
 import { rest } from "msw";
+import { Endpoints } from "../../types/endpoints";
 
-const mockCredentials = {
+export const mockCredentials = {
   username: "mu",
   password: "mp",
-  token: "mocktokenstring",
+  token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJNb2NrIFVzZXIiLCJpYXQiOjE1MTYyMzkwMjJ9.No9v9MP9TnSLkuoctBe18NyNbM6isixc-92-1Kf1IBY"
 };
 
 export const getHandlers = (serverUrl: string) => {
   return [
-    rest.post(`${serverUrl}/api/user/login`, async (req, res, ctx) => {
+    rest.post(`${serverUrl}${Endpoints.login}`, async (req, res, ctx) => {
       const form: { username: string; password: string } = await req.json();
-
-      console.log(form);
       if (
         form.username === mockCredentials.username &&
         form.password === mockCredentials.password
@@ -19,7 +18,7 @@ export const getHandlers = (serverUrl: string) => {
         return res(
           ctx.status(200),
           ctx.json({
-            token: "mocktokenstring",
+            token: mockCredentials.token,
           }),
         );
       }
