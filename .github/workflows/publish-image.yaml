@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./package.Dockerfile
+          file: ./build.Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}, ${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_REPOSITORY }}:latest
           labels: ${{ steps.meta.outputs.labels }}
