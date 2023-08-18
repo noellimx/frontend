@@ -2,10 +2,9 @@
 
 
 
-
 export const Endpoints = {
-    login: "/api/user/login",
+    login: "/api/auth/authenticate",
     youtubeReference: {
-        all: "/reference/youtube/all"
+        all: "/api/reference/youtube/all"
     }
 }

@@ -19,7 +19,7 @@ const Root = (
     <Route index element={<BodyHome />} />
     <Route path="/diagnostics">
       <Route index element={<BodyDiagnostics />} />
-      <Route path="counter" element={<BodyCounter />}></Route>
+      <Route path="ping" element={<BodyCounter />}></Route>
       <Route path="health" element={<AuthWrapper />}>
         <Route path="auth" element={<div>healthcheck</div>}></Route>
       </Route>

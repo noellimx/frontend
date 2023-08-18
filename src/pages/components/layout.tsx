@@ -5,7 +5,24 @@ import { FC, useMemo } from "react";
 import ButtonFC from "./utils/Button";
 import { logoutUser } from "../../redux/store/slice/auth";
 import jwt_decode from "jwt-decode";
+import axios from "axios";
+import { globalConfig } from "../../initConfig";
 
+
+export const ping = () => {
+  return <div className="flex" onClick={async () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    await axios.get(
+      `${globalConfig.serverUrl}`,
+
+      config,
+    );
+  }}>ping</div>
+}
 const Logo = () => {
   const navigate = useNavigate();
   return (
@@ -25,6 +42,7 @@ const Logo = () => {
         </div>
       </div>
       <div className="flex ml-3"> Forager </div>
+
     </div>
   );
 };
@@ -54,10 +72,10 @@ const getUsernameFromJWT = (token: string): string => {
 
   try {
 
-    const tk: { username: string } = jwt_decode(token);
+    const tk: { sub: string } = jwt_decode(token);
 
 
-    return tk["username"];
+    return tk?.sub;
 
   }
   catch {
@@ -79,9 +97,9 @@ const Header = () => {
 
 
 
-  const username = authToken === "" ? "a" : getUsernameFromJWT(authToken)
+  const username = authToken === "" ? "" : getUsernameFromJWT(authToken)
   return (
-    <div className="flex h-16 w-screen  bg-white border-b-4 border-delimiter items-center">
+    <div id="top-nav-usename" className="flex h-16 w-screen  bg-white border-b-4 border-delimiter items-center">
       <Logo />
 
       <div>{`${username}`}</div>

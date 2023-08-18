@@ -46,7 +46,7 @@ export const login = createAsyncThunk<
   { username: string; password: string },
   { rejectValue: AuthenticateThunkRejectValue }
 >(
-  `${sliceName}/logout`,
+  `${sliceName}/login`,
   async (
     { username, password }: { username: string; password: string },
     { rejectWithValue, dispatch },
@@ -86,7 +86,7 @@ export const login = createAsyncThunk<
 );
 
 export const logoutUser = createAsyncThunk(
-  `${sliceName}/login`,
+  `${sliceName}/logout`,
   async () => { },
 );
 

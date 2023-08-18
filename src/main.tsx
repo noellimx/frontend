@@ -19,8 +19,9 @@ import initConfig from "./initConfig.ts";
 
 const reduxMiddlewares: Middleware[] = [];
 
-// Environment-based Config
+// Environment-based Config 
 
+console.log(import.meta.env)
 const globalConfig = initConfig(import.meta.env.VITE_SERVER_URL);
 
 if (import.meta.env.MODE === "development") {

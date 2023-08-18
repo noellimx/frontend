@@ -31,6 +31,7 @@ const sliceName = "dashboard-all"
 export type FoodEstablishmentCard = {
     sfaLicenseNo: string;
     videos: VideoDetail[];
+    postalCode: string;
 };
 type VideoDetail = {
     videoId: string;
@@ -81,6 +82,7 @@ export const getDashboardAll = createAsyncThunk<FoodEstablishmentCard[], void, {
             data: {
                 video_id: string
                 sfa_license_no: string
+                postal_code: string
                 timestamp: string
             }[]
         }>(
@@ -97,6 +99,7 @@ export const getDashboardAll = createAsyncThunk<FoodEstablishmentCard[], void, {
             if (!result.has(item.sfa_license_no)) {
                 result.set(item.sfa_license_no, {
                     sfaLicenseNo: item.sfa_license_no,
+                    postalCode: item.postal_code,
                     videos: []
                 })
             }

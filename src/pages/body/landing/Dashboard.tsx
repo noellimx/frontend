@@ -5,21 +5,26 @@ import { Link } from "react-router-dom";
 
 
 const _FoodEstablishCardFC: FC<{ item: FoodEstablishmentCard }> = ({ item }) => {
-
-
-
     return <div className="flex border-2 py-[5px] px-[10px] rounded-[5px] min-w-[300px] flex-col">
-        <div className="flex border-b-2 border-b-primary-default w-fit">{`${item.sfaLicenseNo}`}</div>
-
         <div className="flex">
 
+
+            <div className="flex border-b-2 border-b-primary-default w-fit">{`${item.sfaLicenseNo}`}</div>
+
+            <div id="card-food-establishment-element-location" className="flex ml-auto">
+                <div>{`${item.postalCode}`}</div>
+            </div>
+
+
+        </div>
+
+        <div id="card-food-establishment-element-videos" className="flex">
             <div>{item.videos.map(v => <div className="flex"><div>{`${v.videoId}`}</div><Link to={`https://youtube.com/watch?v=${v.videoId}&t=${v.timestamp}`} target="_blank" rel="noopener noreferrer" >▸</Link>
             </div>)}</div>
         </div>
+
+
     </div>
-
-
-
 }
 const FoodEstablishmentsContainer = () => {
     const items = useAppSelector(s => s.dashboardAll.items);

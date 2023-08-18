@@ -4,7 +4,7 @@ import counterSlice from "../../redux/store/slice/counter";
 import { useAppDispatch, useAppSelector } from "../../store";
 
 const Page = () => {
-  const counter = useAppSelector((s) => s.state.counter);
+  const counter = useAppSelector((s) => s.counter);
 
   const dispatch = useAppDispatch();
   const nav = useNavigate();

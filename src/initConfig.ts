@@ -6,7 +6,7 @@ export const globalConfig: Config = {
   serverUrl: "",
 };
 
-const initConfig = (serverUrl: string = "") => {
+const initConfig = (serverUrl: string) => {
   globalConfig.serverUrl = serverUrl;
 
   console.log(`globalConfig:  ${JSON.stringify(globalConfig)}`);
