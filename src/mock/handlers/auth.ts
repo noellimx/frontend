@@ -4,7 +4,7 @@ import { Endpoints } from "../../types/endpoints";
 export const mockCredentials = {
   username: "mu",
   password: "mp",
-  token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJNb2NrIFVzZXIiLCJpYXQiOjE1MTYyMzkwMjJ9.No9v9MP9TnSLkuoctBe18NyNbM6isixc-92-1Kf1IBY"
+  token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtb2NrdXNlciIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTUxNjIzOTAyMn0.7X75f-feE1_e20tWqwsxsv_NU00HgA3G-UfpfsY7-Pg"
 };
 
 export const getHandlers = (serverUrl: string) => {
