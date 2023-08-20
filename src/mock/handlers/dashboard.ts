@@ -5,8 +5,26 @@ import { mockCredentials } from "./auth";
 
 export const getHandlers = (serverUrl: string) => {
   return [
-    rest.get(`${serverUrl}${Endpoints.youtubeReference.all}`, async (req, res, ctx) => {
 
+    rest.post(`${serverUrl}${Endpoints.youtubeReference.create}`, async (req, res, ctx) => {
+      /**
+       * curl -H 'Content-type: application/json' 'https://forager.hopto.org/reference/youtube/all'                                  
+{"data":[],"message":""}
+       */
+      const token = req.headers.get("Authorization")
+
+      if (token !== `Bearer ${mockCredentials.token}`) {
+        return res(ctx.status(403))
+      }
+
+
+      const form: { sfa_license_no: string; video_id: string, timestamp: string } = await req.json();
+      const s = { "video_id": form.video_id, "timestamp": form.timestamp, "food_establishment": { "sfa_license_no": form.sfa_license_no } }
+      return res(ctx.status(200), ctx.json(s))
+    }),
+
+
+    rest.get(`${serverUrl}${Endpoints.youtubeReference.all}`, async (req, res, ctx) => {
       /**
        * curl -H 'Content-type: application/json' 'https://forager.hopto.org/reference/youtube/all'                                  
 {"data":[],"message":""}
