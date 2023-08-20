@@ -31,8 +31,8 @@ const sliceName = "dashboard-all"
 export type FoodEstablishmentCard = {
     sfaLicenseNo: string;
     videos: VideoDetail[];
-    postalCode: string;
 };
+
 type VideoDetail = {
     videoId: string;
     timestamp: string;
@@ -81,8 +81,7 @@ export const getDashboardAll = createAsyncThunk<FoodEstablishmentCard[], void, {
         const resp = await axios.get<{
             data: {
                 video_id: string
-                sfa_license_no: string
-                postal_code: string
+                food_establishment: { sfa_license_no: string }
                 timestamp: string
             }[]
         }>(
@@ -96,15 +95,16 @@ export const getDashboardAll = createAsyncThunk<FoodEstablishmentCard[], void, {
         const result = new Map<string, FoodEstablishmentCard>();
 
         for (const item of items) {
-            if (!result.has(item.sfa_license_no)) {
-                result.set(item.sfa_license_no, {
-                    sfaLicenseNo: item.sfa_license_no,
-                    postalCode: item.postal_code,
+
+            const { food_establishment } = item;
+            if (!result.has(food_establishment.sfa_license_no)) {
+                result.set(food_establishment.sfa_license_no, {
+                    sfaLicenseNo: food_establishment.sfa_license_no,
                     videos: []
                 })
             }
 
-            result.get(item.sfa_license_no)?.videos.push({
+            result.get(food_establishment.sfa_license_no)?.videos.push({
                 videoId: item.video_id,
                 timestamp: item.timestamp,
             })

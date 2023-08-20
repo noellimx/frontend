@@ -12,7 +12,7 @@ const _FoodEstablishCardFC: FC<{ item: FoodEstablishmentCard }> = ({ item }) => 
             <div className="flex border-b-2 border-b-primary-default w-fit">{`${item.sfaLicenseNo}`}</div>
 
             <div id="card-food-establishment-element-location" className="flex ml-auto">
-                <div>{`${item.postalCode}`}</div>
+                <div>{`??????`}</div>
             </div>
 
 

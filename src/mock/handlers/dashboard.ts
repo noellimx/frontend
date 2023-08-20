@@ -36,25 +36,33 @@ export const getHandlers = (serverUrl: string) => {
       }
 
 
-
       const reference = {
         video_id: "ASvLVu1obqw",
-        sfa_license_no: "license123345",
-        postal_code: "123456",
+        food_establishment: {
+          sfa_license_no: "license123345",
+        },
+
+
+
+
         timestamp: "30s"
       }
 
       const reference2 = {
         video_id: "aSq7pq40sP4",
-        sfa_license_no: "license123345",
-        postal_code: "123456",
+
+        food_establishment: {
+          sfa_license_no: "license123345",
+        },
         timestamp: "30s"
       }
 
       const reference3 = {
         video_id: "BbtuPZYtjXw",
-        sfa_license_no: "license123345",
-        postal_code: "123456",
+
+        food_establishment: {
+          sfa_license_no: "license123345",
+        },
 
         timestamp: "30s"
       }
@@ -62,23 +70,27 @@ export const getHandlers = (serverUrl: string) => {
 
       const reference4 = {
         video_id: "ASvLVu1obqw",
-        sfa_license_no: "license0123",
-        postal_code: "123456",
+        food_establishment: {
+          sfa_license_no: "license0123",
+        },
 
         timestamp: "30s"
       }
 
       const reference5 = {
         video_id: "aSq7pq40sP4",
-        sfa_license_no: "license0123",
-        postal_code: "123456",
+        food_establishment: {
+
+          sfa_license_no: "license0123",
+        },
         timestamp: "30s"
       }
 
       const reference6 = {
         video_id: "BbtuPZYtjXw",
-        sfa_license_no: "license0123",
-        postal_code: "123456",
+        food_establishment: {
+          sfa_license_no: "license0123",
+        },
         timestamp: "30s"
       }
 
