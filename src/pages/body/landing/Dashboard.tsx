@@ -29,7 +29,7 @@ const _FoodEstablishCardFC: FC<{ item: FoodEstablishmentCard }> = ({ item }) => 
 const FoodEstablishmentsContainer = () => {
     const items = useAppSelector(s => s.dashboardAll.items);
     return <div className="flex flex-col">
-        <h1>Establishments</h1>
+        <h1>Food Establishments</h1>
         <h2 className="flex mt-[5px] space-x-5" id="content-all-items">  {items.map(item => <_FoodEstablishCardFC key={`fec-${item.sfaLicenseNo}`} item={item} />)}</h2>
     </div>
 }

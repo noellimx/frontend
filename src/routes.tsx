@@ -5,6 +5,7 @@ import BodyDiagnostics from "./pages/body/home.tsx";
 import BodyCounter from "./pages/body/counter.tsx";
 import BodyHome from "./pages/body/landing/index.tsx";
 import { useAppSelector } from "./store.tsx";
+import CreateYoutubeReferenceForm from "./pages/body/create/youtubereference/CreateYoutubeReferenceForm.tsx";
 
 const AuthWrapper = () => {
   const auth = useAppSelector((s) => s.auth);
@@ -17,9 +18,9 @@ const AuthWrapper = () => {
 const Root = (
   <Route path="/" element={<DefaultLayout />}>
     <Route index element={<BodyHome />} />
-    <Route path="create">
+    <Route path="create" element={<AuthWrapper />}>
       <Route index element={<></>} />
-      <Route path="youtubeReference" element={<></>} />
+      <Route path="youtubeReference" element={<CreateYoutubeReferenceForm />} />
     </Route>
     <Route path="/diagnostics">
       <Route index element={<BodyDiagnostics />} />

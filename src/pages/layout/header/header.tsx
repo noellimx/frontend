@@ -114,7 +114,12 @@ const Menus = () => {
 const AuthenticatedNavItems = () => {
     const dispatch = useAppDispatch();
 
-    const dispatchLogout = () => dispatch(logoutUser());
+
+    const navigate = useNavigate();
+    const dispatchLogout = () => {
+
+        dispatch(logoutUser()).unwrap().then(() => navigate("/"))
+    };
 
     return (
         <div id="authenticated-nav-items" className="flex space-x-3 ">
