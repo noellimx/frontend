@@ -3,6 +3,77 @@ import { Endpoints } from "../../types/endpoints";
 import { mockCredentials } from "./auth";
 
 
+
+const reference = {
+  video_id: "ASvLVu1obqw",
+  food_establishment: {
+    sfa_license_no: "license123345",
+  },
+
+
+
+
+  timestamp: "30s"
+}
+
+const reference2 = {
+  video_id: "aSq7pq40sP4",
+
+  food_establishment: {
+    sfa_license_no: "license123345",
+  },
+  timestamp: "30s"
+}
+
+const reference3 = {
+  video_id: "BbtuPZYtjXw",
+
+  food_establishment: {
+    sfa_license_no: "license123345",
+  },
+
+  timestamp: "30s"
+}
+
+
+const reference4 = {
+  video_id: "ASvLVu1obqw",
+  food_establishment: {
+    sfa_license_no: "license0123",
+  },
+
+  timestamp: "30s"
+}
+
+const reference5 = {
+  video_id: "aSq7pq40sP4",
+  food_establishment: {
+
+    sfa_license_no: "license0123",
+  },
+  timestamp: "30s"
+}
+
+const reference6 = {
+  video_id: "BbtuPZYtjXw",
+  food_establishment: {
+    sfa_license_no: "license0123",
+  },
+  timestamp: "30s"
+}
+
+
+const reference7 = {
+  video_id: "S9G_9c4Mang",
+  food_establishment: {
+    sfa_license_no: "license0123",
+  },
+  timestamp: "30s"
+}
+
+
+const all = [reference4, reference5, reference7, reference6, reference, reference2, reference3]
+
 export const getHandlers = (serverUrl: string) => {
   return [
 
@@ -19,7 +90,9 @@ export const getHandlers = (serverUrl: string) => {
 
 
       const form: { sfa_license_no: string; video_id: string, timestamp: string } = await req.json();
+
       const s = { "video_id": form.video_id, "timestamp": form.timestamp, "food_establishment": { "sfa_license_no": form.sfa_license_no } }
+      all.push(s)
       return res(ctx.status(200), ctx.json(s))
     }),
 
@@ -36,78 +109,11 @@ export const getHandlers = (serverUrl: string) => {
       }
 
 
-      const reference = {
-        video_id: "ASvLVu1obqw",
-        food_establishment: {
-          sfa_license_no: "license123345",
-        },
 
 
 
 
-        timestamp: "30s"
-      }
-
-      const reference2 = {
-        video_id: "aSq7pq40sP4",
-
-        food_establishment: {
-          sfa_license_no: "license123345",
-        },
-        timestamp: "30s"
-      }
-
-      const reference3 = {
-        video_id: "BbtuPZYtjXw",
-
-        food_establishment: {
-          sfa_license_no: "license123345",
-        },
-
-        timestamp: "30s"
-      }
-
-
-      const reference4 = {
-        video_id: "ASvLVu1obqw",
-        food_establishment: {
-          sfa_license_no: "license0123",
-        },
-
-        timestamp: "30s"
-      }
-
-      const reference5 = {
-        video_id: "aSq7pq40sP4",
-        food_establishment: {
-
-          sfa_license_no: "license0123",
-        },
-        timestamp: "30s"
-      }
-
-      const reference6 = {
-        video_id: "BbtuPZYtjXw",
-        food_establishment: {
-          sfa_license_no: "license0123",
-        },
-        timestamp: "30s"
-      }
-
-
-      const reference7 = {
-        video_id: "S9G_9c4Mang",
-        food_establishment: {
-          sfa_license_no: "license0123",
-        },
-        timestamp: "30s"
-      }
-
-
-
-
-
-      return res(ctx.status(200), ctx.json({ data: [reference4, reference5, reference7, reference6, reference, reference2, reference3] }))
+      return res(ctx.status(200), ctx.json({ data: all }))
     }),
   ];
 };

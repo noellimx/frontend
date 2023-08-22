@@ -1,5 +1,10 @@
 import { ChangeEvent, FC, useState } from "react";
 import ButtonFC from "../../../components/utils/Button";
+import axios, { AxiosError } from "axios";
+import { globalConfig } from "../../../../initConfig";
+import { useAppDispatch, useAppSelector } from "../../../../store";
+import { notify } from "../../../../redux/store/slice/notification";
+import { Endpoints } from "../../../../types/endpoints";
 
 
 
@@ -46,7 +51,7 @@ const DivInputLabelRight: FC<{ divInputId: string, labelText: string, value: str
 
 
 
-const CreateYoutubeReferenceForm = () => {
+const useFormState = () => {
 
     const [url, setUrl] = useState("");
 
@@ -56,6 +61,45 @@ const CreateYoutubeReferenceForm = () => {
     const [tsMin, setTsMin] = useState("");
     const [tsHour, setTsHr] = useState("");
 
+
+    const reset = (shouldResetVideo: boolean = true) => {
+
+        if (shouldResetVideo) {
+            setUrl("")
+            setVideoId("")
+
+        }
+
+        setSfa("")
+        setTsMs("")
+        setTsMin("")
+        setTsHr("")
+    }
+
+    return {
+        url, setUrl, videoId, setVideoId, sfa, setSfa, tsMs, setTsMs, tsMin, setTsMin, tsHour, setTsHr, reset
+    }
+}
+
+const CreateYoutubeReferenceForm = () => {
+
+    // const [url, setUrl] = useState("");
+
+    // const [videoId, setVideoId] = useState("");
+    // const [sfa, setSfa] = useState("");
+    // const [tsMs, setTsMs] = useState("");
+    // const [tsMin, setTsMin] = useState("");
+    // const [tsHour, setTsHr] = useState("");
+
+
+    const { url, setUrl, videoId, setVideoId, sfa, setSfa, tsMs, setTsMs, tsMin, setTsMin, tsHour, setTsHr, reset } = useFormState()
+
+
+
+    const dispatch = useAppDispatch();
+
+    const token = useAppSelector(s => s.auth.token);
+
     const onUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
 
         const url = e.target.value;
@@ -64,6 +108,38 @@ const CreateYoutubeReferenceForm = () => {
         const videoId = youtube_parser(url)
         setVideoId(videoId)
 
+    }
+
+
+    const create = async () => {
+
+        const data = {
+
+            sfa_license_no: sfa,
+            video_id: videoId,
+            timestamp: `${tsHour}h${tsMin}m${tsMs}s`
+        }
+        try {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token,
+                },
+            };
+            const result = await axios.post(
+                `${globalConfig.serverUrl}${Endpoints.youtubeReference.create}`,
+                data,
+                config,
+            );
+            dispatch(notify({ text: JSON.stringify(result.data), ms: 10000, type: "Info" }))
+            reset()
+
+
+        } catch (_error) {
+            const error = _error as AxiosError;
+            dispatch(notify({ text: JSON.stringify(error.message), ms: 10000, type: "Error" }))
+
+        }
     }
 
 
@@ -92,7 +168,7 @@ const CreateYoutubeReferenceForm = () => {
 
 
                 <div className="flex ml-auto">
-                    <ButtonFC text="Create" onClick={() => { }} />
+                    <ButtonFC text="Create" onClick={create} />
                 </div>
             </div>
         </div >
