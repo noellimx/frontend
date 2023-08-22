@@ -87,7 +87,8 @@ export const login = createAsyncThunk<
 
 export const logoutUser = createAsyncThunk(
   `${sliceName}/logout`,
-  async () => { },
+  async () => {
+  },
 );
 
 const SliceAuth = createSlice({

@@ -12,7 +12,7 @@ const _FoodEstablishCardFC: FC<{ item: FoodEstablishmentCard }> = ({ item }) => 
             <div className="flex border-b-2 border-b-primary-default w-fit">{`${item.sfaLicenseNo}`}</div>
 
             <div id="card-food-establishment-element-location" className="flex ml-auto">
-                <div>{`${item.postalCode}`}</div>
+                <div>{`??????`}</div>
             </div>
 
 
@@ -29,8 +29,8 @@ const _FoodEstablishCardFC: FC<{ item: FoodEstablishmentCard }> = ({ item }) => 
 const FoodEstablishmentsContainer = () => {
     const items = useAppSelector(s => s.dashboardAll.items);
     return <div className="flex flex-col">
-        <h1>Establishments</h1>
-        <h2 className="flex mt-[5px] space-x-5" id="content-all-items">  {items.map(item => <_FoodEstablishCardFC item={item} />)}</h2>
+        <h1>Food Establishments</h1>
+        <h2 className="flex mt-[5px] space-x-5" id="content-all-items">  {items.map(item => <_FoodEstablishCardFC key={`fec-${item.sfaLicenseNo}`} item={item} />)}</h2>
     </div>
 }
 
@@ -43,7 +43,7 @@ const ContentAll = () => {
     }, [dispatch])
 
 
-    return <div className="flex"><FoodEstablishmentsContainer /></div>
+    return <div id="food-establishment-container" className="flex overflow-auto"><FoodEstablishmentsContainer /></div>
 }
 
 const DashboardSection: FC<PropsWithChildren<{ sectionId: string }>> = ({ children, sectionId }) => {
